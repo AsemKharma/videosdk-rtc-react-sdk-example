@@ -29,9 +29,45 @@ export const createMeeting = async ({ token }) => {
 
   const { roomId } = await fetch(url, options)
     .then((response) => response.json())
-    .catch((error) => console.error("error", error));
 
-  return roomId;
+    const caller = window.location.pathname.split('/')[3];
+
+
+
+    
+if(caller){
+  const urlParams = new URLSearchParams(window.location.search);
+  const tutorId = window.location.pathname.split('/')[2];
+  const callerId = window.location.pathname.split('/')[4];
+
+  const url2 = `http://localhost:5000/call-Tutor`;
+  const options2 = {
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify({
+      roomId: roomId,
+      tutorId: tutorId,
+      caller: caller,
+      callerId: callerId
+    }),
+  };
+console.log(tutorId,caller,callerId);
+
+
+ await fetch(url2,options2);
+
+console.log("here is the right place")
+return roomId;
+}
+
+
+
+
+
+
+
+
+ 
 };
 
 export const validateMeeting = async ({ roomId, token }) => {

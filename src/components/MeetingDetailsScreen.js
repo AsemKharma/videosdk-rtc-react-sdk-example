@@ -10,7 +10,8 @@ export function MeetingDetailsScreen({
   setVideoTrack,
   onClickStartMeeting,
 }) {
-  const [meetingId, setMeetingId] = useState("");
+  const urlRoomId = window.location.pathname.split('/')[4];
+  const [meetingId, setMeetingId] = useState(urlRoomId);
   const [meetingIdError, setMeetingIdError] = useState(false);
   const [isCopied, setIsCopied] = useState(false);
   const [iscreateMeetingClicked, setIscreateMeetingClicked] = useState(false);
